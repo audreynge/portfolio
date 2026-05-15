@@ -1,9 +1,16 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { Nunito } from "next/font/google"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import SiteShell from "@/components/site-shell"
 import { getSiteUrl } from "@/lib/site-url"
+
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-nunito-sans",
+  display: "swap",
+})
 
 const siteUrl = getSiteUrl()
 
@@ -42,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={nunito.variable}>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" enableSystem={false} disableTransitionOnChange>
           <SiteShell>{children}</SiteShell>

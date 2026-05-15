@@ -309,12 +309,12 @@ export default function BackgroundAudio({ src }: BackgroundAudioProps) {
       <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-[1]" aria-hidden />
       <button
         onClick={handleToggleMute}
-        className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full border border-gray-700 bg-gray-900/85 px-6 py-4 text-sm text-gray-100 shadow-lg backdrop-blur hover:bg-gray-800 transition-colors"
+        className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full border border-gray-700 bg-gray-800/55 px-6 py-4 text-sm text-gray-100 shadow-lg backdrop-blur hover:bg-gray-800 transition-colors"
         aria-label={isMuted ? "Unmute background audio" : "Mute background audio"}
         title={isMuted ? "Unmute" : "Mute"}
       >
-        {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
-        <span className="text-lg font-medium">{isMuted ? "Sound off" : "Sound on"}</span>
+        {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+        <span className="text-sm font-medium">{isMuted ? "Sound off" : "Sound on"}</span>
       </button>
     </>
   )

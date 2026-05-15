@@ -28,7 +28,7 @@ const experienceItems: Array<{
     title: "Software Engineer Intern",
     organization: "Zipline",
     period: "Jun. 2026 - Sep. 2026",
-    description: "Incoming Summer 2026 | Application Software",
+    description: "Incoming Summer 2026 | Commerce Platform",
     icon: Briefcase,
     companyLogo: {
       src: "https://logos.hunter.io/flyzipline.com",
@@ -90,23 +90,25 @@ export default function AboutSection() {
       transition={{ duration: 0.5 }}
       className="min-h-[calc(100vh-10rem)] flex flex-col justify-center"
     >
-      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">About Me</h2>
-      <div className="grid md:grid-cols-2 gap-8 items-center">
-        <div className="order-2 md:order-1">
-          <p className="text-gray-300 mb-4">
+      <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">About Me</h2>
+      <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start max-w-6xl mx-auto w-full">
+        <div className="space-y-4">
+          <p className="text-gray-300">
             I&apos;m a passionate software engineer from Queens, NY with 3+ years of experience building web applications and solving
             complex problems. I specialize in full-stack development and agentic AI systems.
           </p>
-          <p className="text-gray-300 mb-4">
+          <p className="text-gray-300">
             My journey in software development began during my junior year of high school when I learned web
             development myself through <a href="https://www.theodinproject.com/" target="_blank" rel="noopener noreferrer" className="underline">The Odin Project</a>, where I discovered my passion for bringing ideas to life through code. Since then, I&apos;ve worked on various projects, ranging from personal websites to
             complex applications for hackathons, startups, and companies.
           </p>
-          <p className="text-gray-300 mb-4">
+          <p className="text-gray-300">
             I&apos;m a huge self-learner and believe that the best way to grow is by taking on new challenges, being
             consistent, and finishing what you start. Outside of coding, I enjoy speedcubing and photography / photo editing.
           </p>
-          <h3 className="text-xl font-semibold mb-4 mt-8">Education & Experience</h3>
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold mb-4">Education & Experience</h3>
           <ul className="space-y-4">
             {experienceItems.map((item) => (
               <li key={`${item.title}-${item.organization}-${item.period}`} className="border-l-2 border-primary pl-4 py-1">
@@ -128,34 +130,6 @@ export default function AboutSection() {
               </li>
             ))}
           </ul>
-        </div>
-        <div className="order-1 md:order-2 flex justify-center">
-          <div className="w-64 md:w-80 space-y-12">
-            <div className="relative w-64 h-64 md:w-80 md:h-80">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-purple-600 opacity-20 blur-xl"></div>
-              <img
-                src="images/AudreyNg-Headshot.jpg?height=320&width=320"
-                alt="Audrey Ng Headshot"
-                className="relative z-10 rounded-full object-cover w-full h-full border-4 border-gray-800"
-              />
-            </div>
-            <div className="hidden md:block">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                disablePictureInPicture
-                preload="metadata"
-                className="w-full rounded-lg border border-gray-700 pointer-events-none"
-                aria-label="Speedcubing video"
-              >
-                <source src="/videos/speedcubing.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-              <p className="text-sm text-gray-300 mt-2 text-center">I average ~11 seconds on the 3x3 ⚡️</p>
-            </div>
-          </div>
         </div>
       </div>
     </motion.section>
