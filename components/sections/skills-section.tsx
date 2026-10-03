@@ -2,13 +2,17 @@
 
 import { motion } from "framer-motion"
 import {
+  BarChart3,
   Bot,
   Braces,
+  Cloud,
+  Code2,
+  Cpu,
+  Database,
   KanbanSquare,
   Monitor,
   Network,
   Puzzle,
-  Server,
   Settings2,
   Wrench,
 } from "lucide-react"
@@ -26,35 +30,67 @@ const skills: Array<{
   items: SkillItem[]
 }> = [
   {
-    category: "Frontend Development",
-    icon: Monitor,
+    category: "Languages",
+    icon: Code2,
     items: [
-      { name: "React", iconUrl: "https://cdn.simpleicons.org/react/61DAFB" },
       { name: "TypeScript", iconUrl: "https://cdn.simpleicons.org/typescript/3178C6" },
       { name: "JavaScript", iconUrl: "https://cdn.simpleicons.org/javascript/F7DF1E" },
-      { name: "HTML/CSS", fallbackIcon: Braces },
-      { name: "Tailwind CSS", iconUrl: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
-      { name: "Next.js", iconUrl: "https://cdn.simpleicons.org/nextdotjs/FFFFFF" },
+      { name: "Python", iconUrl: "https://cdn.simpleicons.org/python/3776AB" },
+      { name: "Go", iconUrl: "https://cdn.simpleicons.org/go/00ADD8" },
+      { name: "Java", iconUrl: "https://cdn.simpleicons.org/openjdk/FFFFFF" },
+      { name: "C#", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" },
+      { name: "C", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/c/c-original.svg" },
+      { name: "C++", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+      { name: "x86 Assembly", fallbackIcon: Cpu },
+      { name: "SQL", fallbackIcon: Database },
     ],
   },
   {
-    category: "Backend Development",
-    icon: Server,
+    category: "Frontend",
+    icon: Monitor,
+    items: [
+      { name: "React", iconUrl: "https://cdn.simpleicons.org/react/61DAFB" },
+      { name: "Next.js", iconUrl: "https://cdn.simpleicons.org/nextdotjs/FFFFFF" },
+      { name: "Tailwind CSS", iconUrl: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+      { name: "HTML/CSS", fallbackIcon: Braces },
+    ],
+  },
+  {
+    category: "Backend & Data",
+    icon: Database,
     items: [
       { name: "Node.js", iconUrl: "https://cdn.simpleicons.org/nodedotjs/5FA04E" },
       { name: "Express", iconUrl: "https://cdn.simpleicons.org/express/FFFFFF" },
       { name: "PostgreSQL", iconUrl: "https://cdn.simpleicons.org/postgresql/4169E1" },
-      { name: "Python", iconUrl: "https://cdn.simpleicons.org/python/3776AB" },
-      { name: "Java", iconUrl: "https://cdn.simpleicons.org/openjdk/FFFFFF" },
-      { name: "C#", iconUrl: "https://cdn.simpleicons.org/csharp/512BD4" },
-      { name: "Azure", iconUrl: "https://cdn.simpleicons.org/azure/0078D4" },
+      { name: "Cosmos DB", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cosmosdb/cosmosdb-original.svg" },
+      { name: "Redis", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
+      { name: "Snowflake", iconUrl: "https://cdn.simpleicons.org/snowflake/29B5E8" },
+    ],
+  },
+  {
+    category: "Cloud & DevOps",
+    icon: Cloud,
+    items: [
+      { name: "Azure", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
+      { name: "AWS", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
+      { name: "Docker", iconUrl: "https://cdn.simpleicons.org/docker/2496ED" },
+      { name: "Kubernetes", iconUrl: "https://cdn.simpleicons.org/kubernetes/326CE5" },
+      { name: "Argo CD", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/argocd/argocd-original.svg" },
+      { name: "Sentry", iconUrl: "https://cdn.simpleicons.org/sentry/FFFFFF" },
+      { name: "RudderStack", fallbackIcon: BarChart3 },
+    ],
+  },
+  {
+    category: "Systems & AI",
+    icon: Network,
+    items: [
       { name: "Distributed Systems", fallbackIcon: Network },
       { name: "MCP Servers", fallbackIcon: Puzzle },
       { name: "Agentic Workflows", fallbackIcon: Bot },
     ],
   },
   {
-    category: "Tools & Others",
+    category: "Tools & Practices",
     icon: Wrench,
     items: [
       { name: "Git", iconUrl: "https://cdn.simpleicons.org/git/F05032" },
