@@ -87,7 +87,7 @@ export default function SiteShell({ children }: SiteShellProps) {
 
       <footer className="bg-gray-900 border-t border-gray-800 py-6">
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-300 mb-4 md:mb-0">© {new Date().getFullYear()} Audrey Ng. All rights reserved.</div>
+          <div className="text-gray-300 mb-4 md:mb-0">© {new Date().getFullYear()} Audrey Ng</div>
           <div className="flex space-x-4">
             <a
               href="https://github.com/audreynge"
