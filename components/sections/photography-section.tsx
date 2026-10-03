@@ -72,17 +72,14 @@ export default function PhotographySection() {
 
       <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
         {photos.map((photo) => (
-          <figure key={photo.src} className="mb-6 break-inside-avoid">
-            <Image
-              src={photo.src}
-              alt={photo.location}
-              width={1600}
-              height={1000}
-              className="h-auto w-full rounded-lg border border-gray-800"
-            />
-            <figcaption className="mt-2 flex flex-wrap items-center gap-x-2.5 text-sm text-gray-400">
+          <figure
+            key={photo.src}
+            className="relative mb-5 break-inside-avoid overflow-hidden rounded-lg border border-gray-800"
+          >
+            <Image src={photo.src} alt={photo.location} width={1600} height={1000} className="h-auto w-full" />
+            <figcaption className="absolute inset-x-0 bottom-0 flex flex-wrap items-center gap-x-2.5 bg-gradient-to-t from-black/70 to-transparent px-3 pb-2.5 pt-8 text-sm text-gray-100">
               <span>{photo.location}</span>
-              <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-gray-500" />
+              <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-gray-300" />
               <span>{photo.date}</span>
             </figcaption>
           </figure>
