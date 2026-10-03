@@ -1,92 +1,270 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image"
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { Fragment } from "react"
+import { Briefcase } from "lucide-react"
 
-const ROLE_ROTATION = ["Software Engineer", "CS @ Northeastern", "Speedcuber", "Photographer"]
-
-const roleChipClassName =
-  "inline-flex min-h-[2.75rem] md:min-h-[3.25rem] items-center rounded-lg border border-violet-500/35 bg-violet-950/30 px-4 py-2 md:px-5 md:py-2.5 font-mono text-base md:text-lg text-violet-300 shadow-[0_0_14px_rgba(167,139,250,0.18)]"
-
-const roleCaretClassName =
-  "ml-1 inline-block h-[1.1em] w-[3px] animate-pulse rounded-full bg-violet-200/90"
-
-const sectionMotion = {
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.45 },
+type Logo = {
+  src: string
+  alt: string
 }
 
+type Role = {
+  title: string
+  team?: string
+  period: string
+  description?: string
+  incoming?: boolean
+}
+
+type Company = {
+  organization: string
+  logo?: Logo
+  roles: Role[]
+}
+
+const education = {
+  school: "Northeastern University",
+  degree: "Bachelor of Science in Computer Science",
+  period: "Sep. 2024 - May 2028",
+  details: ["Concentration: Systems", "Minor: Math"],
+  logo: {
+    src: "https://logos.hunter.io/northeastern.edu",
+    alt: "Northeastern University logo",
+  },
+}
+
+const experience: Company[] = [
+  {
+    organization: "Datadog",
+    logo: {
+      src: "https://www.google.com/s2/favicons?domain=datadoghq.com&sz=128",
+      alt: "Datadog logo",
+    },
+    roles: [
+      {
+        title: "Software Engineer Intern",
+        period: "Jan. 2027 - Apr. 2027",
+        incoming: true,
+      },
+    ],
+  },
+  {
+    organization: "Zipline",
+    logo: {
+      src: "https://www.google.com/s2/favicons?domain=flyzipline.com&sz=128",
+      alt: "Zipline logo",
+    },
+    roles: [
+      {
+        title: "Software Engineer Intern",
+        team: "Marketplace Software",
+        period: "Jun. 2026 - Sep. 2026",
+        description:
+          "Shipped a merchant portal in Go that integrates Snowflake analytics with Redis caching to surface order and financial metrics for delivery partners, and a menu & availability tab for restaurant partners to manage menus and item stock status. Integrated Sentry for error monitoring and RudderStack for product analytics.",
+      },
+    ],
+  },
+  {
+    organization: "Microsoft",
+    logo: {
+      src: "https://www.google.com/s2/favicons?domain=microsoft.com&sz=128",
+      alt: "Microsoft logo",
+    },
+    roles: [
+      {
+        title: "Software Engineer Intern",
+        team: "Azure Resource Graph",
+        period: "Apr. 2026 - Jun. 2026",
+        description:
+          "Built a distributed C# background worker to reconcile inconsistencies between Azure Data Lake and Cosmos DB and clean up abandoned staging data, using Cosmos DB FeedRanges, ETag-based concurrency control, and batch processing validated across 200+ unit tests.",
+      },
+      {
+        title: "Software Engineer Intern",
+        team: "Dynamics 365 Field Service",
+        period: "Jan. 2026 - Apr. 2026",
+        description:
+          "Designed and built 2 end-to-end agent architectures with MCP servers, Power Automate, and Azure that let field technicians run work order operations through natural language in Copilot, spanning work orders, bookable resource bookings, and work order products and services. Built 10 agentic workflows and ran 30+ LLM evaluations to validate prompt and tool behavior.",
+      },
+    ],
+  },
+  {
+    organization: "Siemens",
+    logo: {
+      src: "https://www.google.com/s2/favicons?domain=siemens.com&sz=128",
+      alt: "Siemens logo",
+    },
+    roles: [
+      {
+        title: "Software Engineer Intern",
+        team: "Innovation Core",
+        period: "Jun. 2025 - Dec. 2025",
+        description:
+          "Deployed a project management platform for 300+ employees with TypeScript, React, Next.js, and PostgreSQL, improving query performance ~30% and accelerating deployments by containerizing services on Rancher.",
+      },
+    ],
+  },
+  {
+    organization: "Northeastern SGA",
+    logo: {
+      src: "https://www.google.com/s2/favicons?domain=northeasternsga.com&sz=128",
+      alt: "Northeastern SGA logo",
+    },
+    roles: [
+      {
+        title: "Software Engineer",
+        team: "Digital Innovation",
+        period: "Jan. 2025 - Oct. 2025",
+        description:
+          "Migrated the Northeastern SGA website from Squarespace to a self-hosted platform with custom interactive components. Built an admin dashboard with drag-and-drop tools that let SGA staff reassign members across pages and edit titles without touching code.",
+      },
+    ],
+  },
+  {
+    organization: "Wordmogul",
+    logo: {
+      src: "/images/logos/wordmogul.png",
+      alt: "Wordmogul logo",
+    },
+    roles: [
+      {
+        title: "Software Engineer Intern",
+        period: "May 2024 - Nov. 2024",
+        description:
+          "Built LLM-powered blog generation with the OpenAI API, turning user prompts into full drafts and titles, and a scheduling system for timed post publishing using Python and Go. Set up event-driven Slack alerts on key user actions like page visits, post creation, and editing to surface engagement in real time.",
+      },
+    ],
+  },
+]
+
+function Separator() {
+  return <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-gray-500" />
+}
+
+function DotList({ items, className }: { items: string[]; className?: string }) {
+  return (
+    <div className={`flex flex-wrap items-center gap-x-2.5 gap-y-1 ${className ?? ""}`}>
+      {items.map((item, i) => (
+        <Fragment key={item}>
+          {i > 0 && <Separator />}
+          <span>{item}</span>
+        </Fragment>
+      ))}
+    </div>
+  )
+}
+
+function CompanyLogo({ logo }: { logo?: Logo }) {
+  return logo ? (
+    <img src={logo.src} alt={logo.alt} className="h-6 w-6 shrink-0 rounded-sm" />
+  ) : (
+    <Briefcase className="h-5 w-5 text-primary shrink-0" />
+  )
+}
+
+function RoleDetails({ role }: { role: Role }) {
+  return (
+    <div>
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+          <span className="text-primary font-medium">{role.title}</span>
+          {role.team && (
+            <>
+              <Separator />
+              <span className="text-sm text-gray-300">{role.team}</span>
+            </>
+          )}
+          {role.incoming && (
+            <span className="rounded-full border border-primary/40 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-primary">
+              Incoming
+            </span>
+          )}
+        </div>
+        <span className="text-xs uppercase tracking-wide text-gray-400 whitespace-nowrap">{role.period}</span>
+      </div>
+      {role.description && <p className="mt-1 text-sm text-gray-400">{role.description}</p>}
+    </div>
+  )
+}
+
+const TAGLINE = ["Software Engineer", "CS @ Northeastern"]
+
 export default function HomeSection() {
-  const [roleIndex, setRoleIndex] = useState(0)
-  const [displayedRole, setDisplayedRole] = useState("")
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  useEffect(() => {
-    const currentRole = ROLE_ROTATION[roleIndex]
-    const delay = isDeleting ? 45 : displayedRole.length === currentRole.length ? 1200 : 90
-
-    const timer = window.setTimeout(() => {
-      if (isDeleting) {
-        if (displayedRole.length > 0) {
-          setDisplayedRole((prev) => prev.slice(0, -1))
-          return
-        }
-
-        setIsDeleting(false)
-        setRoleIndex((prev) => (prev + 1) % ROLE_ROTATION.length)
-        return
-      }
-
-      if (displayedRole.length < currentRole.length) {
-        setDisplayedRole(currentRole.slice(0, displayedRole.length + 1))
-        return
-      }
-
-      setIsDeleting(true)
-    }, delay)
-
-    return () => {
-      window.clearTimeout(timer)
-    }
-  }, [displayedRole, isDeleting, roleIndex])
-
   return (
     <motion.section
-      {...sectionMotion}
-      className="w-full max-w-6xl mx-auto min-h-[min(100vh-10rem,900px)] flex flex-col justify-center items-center text-center pb-8"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="py-8"
     >
-      <div className="flex flex-col items-center max-w-lg">
-        <div className="relative w-44 h-44 md:w-56 md:h-56 mb-5 md:mb-7">
-          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-purple-600 opacity-20 blur-xl" />
+      <div className="grid md:grid-cols-[auto_1fr] gap-10 md:gap-14 items-start max-w-5xl mx-auto w-full">
+        <div className="relative w-44 h-44 md:w-52 md:h-52 mx-auto">
           <div className="relative z-10 w-full h-full rounded-full overflow-hidden border-4 border-gray-800 shadow-xl">
             <Image
-              src="/images/AudreyNg-Headshot.jpg?height=256&width=256"
-              alt="Audrey Ng Headshot"
+              src="/images/AudreyNg-Headshot.jpg"
+              alt="Audrey Ng headshot"
               fill
               className="object-cover"
               priority
             />
           </div>
         </div>
-        <p className="text-gray-300 text-lg">Hi 👋, I&apos;m</p>
-        <h1 className="text-primary md:text-4xl lg:text-5xl font-semibold mb-5 md:mb-7">Audrey Ng</h1>
-        <h2 className="text-lg md:text-2xl mb-4 md:mb-5 min-h-[3.25rem] md:min-h-[3.75rem] flex items-center justify-center w-full">
-          <span className={roleChipClassName}>
-            {displayedRole || "\u00a0"}
-            <span className={roleCaretClassName} aria-hidden />
-          </span>
-        </h2>
-        <Link
-          href="/about"
-          className="mt-1 inline-flex underline underline-offset-4 items-center gap-2 text-base font-medium hover:text-violet-200 transition-colors"
-        >
-          About me
-          <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-        </Link>
+        <div className="space-y-4 text-center md:text-left">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-semibold text-primary">Audrey Ng</h1>
+            <DotList items={TAGLINE} className="mt-2 justify-center md:justify-start text-base md:text-lg text-gray-300" />
+          </div>
+          <p className="text-gray-300">
+            I&apos;m a software engineer from Queens, NY with 3+ years of experience building web applications and solving
+            complex problems. I have experience in full-stack development, agentic AI, distributed systems, and product engineering.
+          </p>
+          <p className="text-gray-300">
+            I became interested in software development during my junior year of high school when I decided to learn web
+            development myself through <a href="https://www.theodinproject.com/" target="_blank" rel="noopener noreferrer" className="underline">The Odin Project</a>. I really enjoyed the process of bringing ideas to life through code. Since then, I&apos;ve worked on various projects, ranging from personal websites to
+            complex applications for hackathons and companies.
+          </p>
+          <p className="text-gray-300">
+            I&apos;m a huge self-learner and believe that the best way to grow is by taking on new challenges, being
+            consistent, and finishing what you start. Outside of coding, I enjoy speedcubing, photography, and photo editing!
+          </p>
+        </div>
+      </div>
+
+      <div className="max-w-5xl mx-auto w-full mt-16">
+        <h3 className="text-2xl font-semibold mb-6">Education</h3>
+        <div className="border-l-2 border-primary pl-4">
+          <div className="flex items-center gap-2 mb-2">
+            <CompanyLogo logo={education.logo} />
+            <span className="font-semibold text-base">{education.school}</span>
+          </div>
+          <RoleDetails role={{ title: education.degree, period: education.period }} />
+          <DotList items={education.details} className="mt-1 text-sm text-gray-400" />
+        </div>
+
+        <h3 className="text-2xl font-semibold mt-12 mb-6">Experience</h3>
+        <ul className="space-y-8">
+          {experience.map((company) => (
+            <li key={company.organization} className="border-l-2 border-primary pl-4">
+              <div className="flex items-center gap-2 mb-2">
+                <CompanyLogo logo={company.logo} />
+                <span className="font-semibold text-base">{company.organization}</span>
+              </div>
+              {company.roles.length === 1 ? (
+                <RoleDetails role={company.roles[0]} />
+              ) : (
+                <ul className="space-y-4 ml-1 border-l border-gray-700 pl-4">
+                  {company.roles.map((role) => (
+                    <li key={`${role.team}-${role.period}`} className="relative">
+                      <span className="absolute -left-[1.3rem] top-2 h-2 w-2 rounded-full bg-primary" />
+                      <RoleDetails role={role} />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     </motion.section>
   )

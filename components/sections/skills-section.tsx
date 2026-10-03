@@ -2,19 +2,14 @@
 
 import { motion } from "framer-motion"
 import {
-  BarChart3,
   Bot,
   Braces,
-  Cloud,
-  Code2,
   Cpu,
   Database,
   KanbanSquare,
-  Monitor,
   Network,
   Puzzle,
   Settings2,
-  Wrench,
 } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
@@ -26,12 +21,10 @@ type SkillItem = {
 
 const skills: Array<{
   category: string
-  icon: LucideIcon
   items: SkillItem[]
 }> = [
   {
     category: "Languages",
-    icon: Code2,
     items: [
       { name: "TypeScript", iconUrl: "https://cdn.simpleicons.org/typescript/3178C6" },
       { name: "JavaScript", iconUrl: "https://cdn.simpleicons.org/javascript/F7DF1E" },
@@ -47,7 +40,6 @@ const skills: Array<{
   },
   {
     category: "Frontend",
-    icon: Monitor,
     items: [
       { name: "React", iconUrl: "https://cdn.simpleicons.org/react/61DAFB" },
       { name: "Next.js", iconUrl: "https://cdn.simpleicons.org/nextdotjs/FFFFFF" },
@@ -57,7 +49,6 @@ const skills: Array<{
   },
   {
     category: "Backend & Data",
-    icon: Database,
     items: [
       { name: "Node.js", iconUrl: "https://cdn.simpleicons.org/nodedotjs/5FA04E" },
       { name: "Express", iconUrl: "https://cdn.simpleicons.org/express/FFFFFF" },
@@ -69,7 +60,6 @@ const skills: Array<{
   },
   {
     category: "Cloud & DevOps",
-    icon: Cloud,
     items: [
       { name: "Azure", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" },
       { name: "AWS", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" },
@@ -77,12 +67,11 @@ const skills: Array<{
       { name: "Kubernetes", iconUrl: "https://cdn.simpleicons.org/kubernetes/326CE5" },
       { name: "Argo CD", iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/argocd/argocd-original.svg" },
       { name: "Sentry", iconUrl: "https://cdn.simpleicons.org/sentry/FFFFFF" },
-      { name: "RudderStack", fallbackIcon: BarChart3 },
+      { name: "RudderStack", iconUrl: "https://www.rudderstack.com/images/logos/logo-mark-white.svg" },
     ],
   },
   {
     category: "Systems & AI",
-    icon: Network,
     items: [
       { name: "Distributed Systems", fallbackIcon: Network },
       { name: "MCP Servers", fallbackIcon: Puzzle },
@@ -91,7 +80,6 @@ const skills: Array<{
   },
   {
     category: "Tools & Practices",
-    icon: Wrench,
     items: [
       { name: "Git", iconUrl: "https://cdn.simpleicons.org/git/F05032" },
       { name: "Figma", iconUrl: "https://cdn.simpleicons.org/figma/F24E1E" },
@@ -106,46 +94,33 @@ export default function SkillsSection() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-[calc(100vh-10rem)] flex flex-col justify-center py-8"
+      className="max-w-5xl mx-auto w-full py-8"
     >
+      <h2 className="text-3xl md:text-4xl font-bold mb-8">Skills</h2>
       <div>
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Technical Skills</h2>
-
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {skills.map((group, i) => (
-            <motion.div
-              key={group.category}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="rounded-xl shadow-lg p-6 bg-primary/10 border border-primary/20"
-            >
-              <div className="flex items-center gap-3 mb-4 pb-2 border-b border-gray-700">
-                <div className="p-2 rounded-lg bg-gray-800 text-primary">
-                  <group.icon className="h-5 w-5" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-200">{group.category}</h3>
-              </div>
-              <div className="flex flex-wrap gap-2 mt-4">
-                {group.items.map((skill) => (
-                  <span
-                    key={skill.name}
-                    className="inline-flex items-center gap-2 bg-gray-800/60 text-primary font-medium px-3 py-2 rounded-lg shadow-sm border border-gray-700"
-                  >
+        {skills.map((group) => (
+          <div
+            key={group.category}
+            className="grid gap-3 md:grid-cols-[13rem_1fr] md:gap-4 py-5 border-t border-gray-800"
+          >
+            <h3 className="text-sm font-medium text-gray-400 md:pt-0.5">{group.category}</h3>
+            <ul className="flex flex-wrap gap-x-6 gap-y-3">
+              {group.items.map((skill) => {
+                const FallbackIcon = skill.fallbackIcon ?? Settings2
+                return (
+                  <li key={skill.name} className="inline-flex items-center gap-2 text-gray-200">
                     {skill.iconUrl ? (
-                      <img src={skill.iconUrl} alt={`${skill.name} icon`} className="h-3.5 w-3.5" />
-                    ) : skill.fallbackIcon ? (
-                      <skill.fallbackIcon className="h-3.5 w-3.5 opacity-90" />
+                      <img src={skill.iconUrl} alt="" className="h-4 w-4" />
                     ) : (
-                      <Settings2 className="h-3.5 w-3.5 opacity-90" />
+                      <FallbackIcon className="h-4 w-4 text-gray-400" aria-hidden />
                     )}
                     {skill.name}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        ))}
       </div>
     </motion.section>
   )

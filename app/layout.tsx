@@ -1,14 +1,14 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Nunito } from "next/font/google"
+import { Plus_Jakarta_Sans } from "next/font/google"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import SiteShell from "@/components/site-shell"
 import { getSiteUrl } from "@/lib/site-url"
 
-const nunito = Nunito({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-nunito-sans",
+  variable: "--font-plus-jakarta-sans",
   display: "swap",
 })
 
@@ -44,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={nunito.variable}>
+    <html lang="en" suppressHydrationWarning className={plusJakartaSans.variable}>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" enableSystem={false} disableTransitionOnChange>
           <SiteShell>{children}</SiteShell>

@@ -10,10 +10,10 @@ export default function ProjectsSection() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="min-h-[calc(100vh-10rem)] flex flex-col justify-center"
+      className="max-w-5xl mx-auto w-full py-8"
     >
-      <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">My Projects</h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <h2 className="text-3xl md:text-4xl font-bold mb-8">Projects</h2>
+      <div>
         {projects.map((project) => (
           <ProjectCard
             key={project.title}

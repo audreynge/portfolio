@@ -12,11 +12,9 @@ type SiteShellProps = {
 }
 
 const navItems = [
-  { label: "about", href: "/about" },
   { label: "projects", href: "/projects" },
   { label: "photography", href: "/photography" },
   { label: "skills", href: "/skills" },
-  { label: "contact", href: "/contact" },
 ]
 
 export default function SiteShell({ children }: SiteShellProps) {
@@ -29,7 +27,7 @@ export default function SiteShell({ children }: SiteShellProps) {
   }, [pathname])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 to-gray-900">
+    <div className="min-h-dvh flex flex-col bg-gradient-to-br from-gray-950 to-gray-900">
       <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-sm border-b border-gray-800">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="inline-flex items-center gap-2 text-2xl font-bold text-white bg-clip-text">
@@ -83,9 +81,9 @@ export default function SiteShell({ children }: SiteShellProps) {
         )}
       </header>
 
-      <main className="container mx-auto px-3 sm:px-4 pt-24 pb-16">{children}</main>
+      <main className="flex-1 flex flex-col container mx-auto px-3 sm:px-4 pt-24 pb-32 md:pb-24">{children}</main>
 
-      <footer className="bg-gray-900 border-t border-gray-800 py-6">
+      <footer className="fixed bottom-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-sm border-t border-gray-800 py-6">
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
           <div className="text-gray-300 mb-4 md:mb-0">© {new Date().getFullYear()} Audrey Ng</div>
           <div className="flex space-x-4">
